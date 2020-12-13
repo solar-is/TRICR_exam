@@ -1,4 +1,4 @@
-package com.prosolovich.tricr.exam;
+package com.prosolovich.tricr.exam.repository;
 
 import com.prosolovich.tricr.exam.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;

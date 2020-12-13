@@ -11,10 +11,7 @@
     <meta name="csrf-token" th:content="${_csrf.token}">
 </head>
 <body>
-<h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
-<form th:action="@{/logout}" method="post">
-    <input type="submit" value="Sign Out"/>
-</form>
+<p th:if="${message != null}" th:text="${message}"></p>
 <table class="wrapper">
     <tr class="header">
         <td class="students">P33211 Просолович М.А. Тайц Ю.М.</td>
@@ -22,7 +19,7 @@
     </tr>
     <tr class="content">
         <td colspan="2">
-            <h1>Лабораторная работа №2</h1>
+            <h1>Лабораторная работа №3</h1>
             <div class="content-wrapper">
                 <div class="area">
                     <canvas id="canvasId" width="200px" height="200px"></canvas>
@@ -78,6 +75,14 @@
 
             </div>
         </td>
+    </tr>
+    <tr>
+       <td colspan="2">
+           <h1 th:inline="text">User: [[${#httpServletRequest.remoteUser}]]!</h1>
+           <form th:action="@{/logout}" method="post">
+               <input type="submit" value="Sign Out"/>
+           </form>
+       </td>
     </tr>
 </table>
 <script type="text/javascript" th:src="@{/static/jquery-3.4.1.min.js}"></script>
@@ -164,8 +169,7 @@
             });
 
             $('.clear-cookie').on('click', function () {
-                $('.results tr:not(:first-child)').remove();
-                $.post("/", 'clearSession');
+                $.post("/?clearSession=true");
                 location.reload();
             });
 
