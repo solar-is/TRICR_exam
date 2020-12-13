@@ -1,0 +1,21 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>AreaCheck</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" th:href="@{/assets/css/style.css}"/>
+</head>
+<body>
+<table>
+    <tr th:if="${point != null}">
+        <td th:text="${point.x} ?: 'Nice try, mamkin hacker!'"></td>
+        <td th:text="${point.y} ?: 'Nice try, mamkin hacker!'"></td>
+        <td th:text="${point.r} ?: 'Nice try, mamkin hacker!'"></td>
+        <td class="in" th:if="${point.isEntry()} ?: false">Попадает</td>
+        <td class="out" th:unless="${point.isEntry()} ?: true">Не попадает</td>
+    </tr>
+    <tr th:if="${point == null}">
+        <td>Nice try, mamkin hacker!</td>
+    </tr>
+</table>
+</body>
+</html>
