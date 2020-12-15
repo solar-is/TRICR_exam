@@ -32,12 +32,14 @@ public class MainController {
     @PostMapping("/registration")
     public String addUser(User user, Model model) {
         User userInDB = userRepository.findByUsername(user.getUsername());
-        if (userInDB != null) {
-            model.addAttribute("message", "User already exist!");
+        if (user.getUsername().isEmpty() || user.getPassword().isEmpty()) {
+            model.addAttribute("message", "Введите имя пользователя и пароль!");
+        } else if (userInDB != null) {
+            model.addAttribute("message", "Пользователь с таким именем уже существует!");
         } else {
             user.setActive(true);
             userRepository.save(user);
-            model.addAttribute("message", "User " + user.getUsername() + " successfully signed up!");
+            model.addAttribute("message", "Пользователь " + user.getUsername() + " успешно зарегистрирован!");
         }
         return "redirect:/login";
     }

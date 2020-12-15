@@ -18,7 +18,7 @@
         <td class="variant">Вариант 5126</td>
     </tr>
     <tr class="content">
-        <td colspan="2">
+        <td>
             <h1>Лабораторная работа №3</h1>
             <div class="content-wrapper">
                 <div class="area">
@@ -56,33 +56,34 @@
                     <div class="clear-cookie">Очистить таблицу</div>
                 </form>
 
-                <table class="results">
-                    <tr>
-                        <th>X</th>
-                        <th>Y</th>
-                        <th>R</th>
-                        <th>Попадание</th>
-                    </tr>
-
-                    <tr th:if="${entries != null}" th:each="details : ${entries}">
-                        <td th:text="${details.x}"></td>
-                        <td th:text="${details.y}"></td>
-                        <td th:text="${details.r}"></td>
-                        <td class="in" th:if="${details.isEntry()}">Попадает</td>
-                        <td class="out" th:unless="${details.isEntry()}">Не попадает</td>
-                    </tr>
-                </table>
-
             </div>
         </td>
+        <td>
+            <p class="username" th:inline="text">Пользователь: [[${#httpServletRequest.remoteUser}]]</p>
+            <form th:action="@{/logout}" method="post">
+                <input class="signout" type="submit" value="Sign Out"/>
+            </form>
+        </td>
     </tr>
-    <tr>
-       <td colspan="2">
-           <h1 th:inline="text">User: [[${#httpServletRequest.remoteUser}]]!</h1>
-           <form th:action="@{/logout}" method="post">
-               <input type="submit" value="Sign Out"/>
-           </form>
-       </td>
+    <tr class="results_row">
+        <td colspan="2">
+            <table class="results">
+                <tr>
+                    <th>X</th>
+                    <th>Y</th>
+                    <th>R</th>
+                    <th>Попадание</th>
+                </tr>
+
+                <tr th:if="${entries != null}" th:each="details : ${entries}">
+                    <td th:text="${details.x}"></td>
+                    <td th:text="${details.y}"></td>
+                    <td th:text="${details.r}"></td>
+                    <td class="in" th:if="${details.isEntry()}">Попадает</td>
+                    <td class="out" th:unless="${details.isEntry()}">Не попадает</td>
+                </tr>
+            </table>
+        </td>
     </tr>
 </table>
 <script type="text/javascript" th:src="@{/static/jquery-3.4.1.min.js}"></script>
