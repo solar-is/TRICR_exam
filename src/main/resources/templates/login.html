@@ -1,360 +1,14 @@
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
-      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
 <head>
-    <!--<link rel="stylesheet" type="text/css" th:href="@{/assets/css/style.css}"/>-->
+    <meta charset="UTF-8">
+    <meta name="viewport"
+    content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="shortcut icon" th:href="@{/static/favicon.ico}" type="image/x-icon">
+    <title>Lab 2 Просолович М.А. Тайц Ю.М.</title>
     <meta name="csrf-token" th:content="${_csrf.token}">
-    <style type="text/css">
-        body {
-            margin: 0;
-        }
-
-        table {
-            border-spacing: 0;
-            border-collapse: collapse;
-        }
-
-        .wrapper {
-            width: 100%;
-        }
-
-        .header {
-            font-family: serif;
-            font-weight: bold;
-            text-shadow: 1px 1px 2px #000000;
-            background-color: #6ba1e5;
-            color: #ffffff;
-            font-size: 30px;
-            width: 100%;
-        }
-
-        .header td {
-            padding-top: 30px;
-            padding-bottom: 30px;
-        }
-
-        .students {
-            padding-left: 130px;
-            width: 50%;
-        }
-
-        .variant {
-            padding-right: 130px;
-            width: 50%;
-            text-align: right;
-        }
-
-        h1 {
-            font-size: 30px;
-            font-weight: bold;
-        }
-
-        .content > td, .results_row > td {
-            padding: 20px 100px;
-        }
-
-        .content > td:last-child {
-            width: 100px;
-            vertical-align: top;
-            text-align: left;
-        }
-        tr.content {
-            display: block;
-            width: 1250px;
-        }
-
-        .content-wrapper {
-            display: flex;
-            flex-wrap: wrap;
-        }
-
-        .area {
-            margin-right: 50px;
-        }
-
-        .area img {
-            width: 100%;
-            max-width: 250px;
-            max-height: 250px;
-            display: block;
-        }
-
-        .selection > div {
-            margin-bottom: 5px;
-        }
-
-        .selection-label {
-            display: block;
-            margin-bottom: 4px;
-            position: relative;
-        }
-
-        #Y-select {
-            display: block;
-            width: 50px;
-            padding: 1% 2%;
-            border: solid 1px #515358;
-            border-radius: 5px;
-            outline: 0;
-        }
-
-        #Y-select:focus {
-            border-color: #2086d2;
-        }
-
-        .btn-submit {
-            padding: 10px 50px;
-            background: #04c401;
-            border: 0;
-            border-radius: 5px;
-            color: #ffffff;
-            font-size: 18px;
-            cursor: pointer;
-            outline: none;
-        }
-
-        .btn-submit:hover {
-            background: #038801;
-        }
-
-        .btn-submit:active {
-            background: #025800;
-        }
-
-        .clear-cookie {
-            display: inline-block;
-            padding: 10px 30px;
-            background: #b51101;
-            border: 0;
-            border-radius: 5px;
-            color: #ffffff;
-            font-size: 18px;
-            cursor: pointer;
-        }
-
-        .clear-cookie:hover {
-            background: #860c01;
-        }
-
-        .clear-cookie:active {
-            background: #620b00;
-        }
-
-        .results {
-            width: 100%;
-        }
-
-        .results tr:nth-child(2n) {
-            background-color: #e2f2ff;
-        }
-
-        .results tr:nth-child(2n+1) {
-            background-color: #f3f8ff;
-        }
-
-        .results th {
-            background-color: #95c2ff;
-        }
-
-        .results td, th {
-            border: solid 1px black;
-            padding: 4px 10px;
-            text-align: center;
-            width: 17%;
-        }
-
-        .area-check-table {
-            display: inline-block;
-            width: 600px;
-            margin: 20px;
-        }
-
-        .to_main_page {
-            display: inline-block;
-            vertical-align: top;
-            margin-top: 20px;
-            background: #9098A9;
-            text-align: center;
-            text-decoration: none;
-            font-size: 16px;
-            color: black;
-            border: 1px solid black;
-            padding: 17px 5px;
-            width: fit-content;
-        }
-
-        .to_main_page:hover {
-            background: #666a82;
-        }
-
-        .to_main_page:active {
-            background: #4b4f6e;
-        }
-
-        .out {
-            color: #c80000;
-        }
-
-        .in {
-            color: #00C738;
-        }
-
-        .warning {
-            content: attr(data-validate);
-            display: inline-block;
-            visibility: hidden;
-            position: relative;
-            background-size: 15px;
-            width: 15px;
-            height: 15px;
-            background-image: url("../../static/warning.svg");
-            vertical-align: top;
-            margin-top: 2px;
-            margin-left: 6px;
-            transform-style: preserve-3d;
-        }
-
-        .icon-visible {
-            visibility: visible;
-            opacity: 1;
-        }
-
-        .warning::after {
-            content: attr(data-validate);
-            position: absolute;
-            visibility: hidden;
-            opacity: 0;
-            width: max-content;
-            left: -5px;
-            top: 50%;
-            padding: 4px 4px 3px 23px;
-            font-size: 12px;
-            background-color: #ffffff;
-            color: #c80000;
-            border: 1px solid #c80000;
-            border-radius: 3px;
-            transform: translateY(-50%) translateZ(-1px);
-        }
-
-        .selection-label:hover .icon-visible::after {
-            visibility: visible;
-            opacity: 1;
-        }
-
-        .cbx-x, .cbx-r  {
-            display: inline-block;
-            margin-right: 6px;
-            margin-bottom: 4px;
-            user-select: none;
-            cursor: pointer;
-        }
-
-        .signout {
-            padding: 10px 30px;
-            background: #2086d2;
-            border: 0;
-            border-radius: 5px;
-            color: #ffffff;
-            font-size: 18px;
-            cursor: pointer;
-            outline: none;
-        }
-
-        .signout:hover {
-            background: #166394;
-        }
-
-        .signout:active {
-            background: #1f4f88;
-        }
-
-        .username {
-            font-size: 20px;
-            font-weight: bold;
-        }
-
-        .signin > div {
-            margin-bottom: 5px;
-        }
-
-        .signin-label {
-            display: block;
-            position: relative;
-        }
-
-        .signin-label > input {
-            min-width: 180px;
-            display: block;
-        }
-
-        .btn-signin {
-            padding: 5px;
-            width: 180px;
-            background: #2086d2;
-            border: 0;
-            border-radius: 3px;
-            color: #ffffff;
-            font-size: 14px;
-            cursor: pointer;
-            outline: none;
-        }
-
-        .btn-signin:hover {
-            background: #166394;
-        }
-
-        .btn-signin:active {
-            background: #1f4f88;
-        }
-
-        .signup > div {
-            margin-bottom: 5px;
-        }
-
-        .signup-label {
-            display: block;
-            position: relative;
-        }
-
-        .signup-label > input {
-            min-width: 180px;
-            display: block;
-        }
-
-        .btn-signup {
-            padding: 5px;
-            width: 180px;
-            background: #2086d2;
-            border: 0;
-            border-radius: 3px;
-            color: #ffffff;
-            font-size: 14px;
-            cursor: pointer;
-            outline: none;
-        }
-
-        .btn-signup:hover {
-            background: #166394;
-        }
-
-        .btn-signup:active {
-            background: #1f4f88;
-        }
-
-        .login-error {
-            width: 200px;
-            font-size: 14px;
-            font-weight: bold;
-            color: #c80000;
-        }
-
-        .logout, .login-message {
-            width: 400px;
-            font-size: 16px;
-            font-weight: bold;
-            color: #c80000;
-        }
-
-    </style>
+    <link rel="stylesheet" type="text/css" th:href="@{/assets/css/style.css}"/>
 </head>
 <body>
 <table class="wrapper">
@@ -370,35 +24,25 @@
             <div class="logout" th:if="${param.logout}">
                 <p>Вы успешно вышли из аккаунта.</p>
             </div>
-            <div class="login-message" th:if="${param.message}">
-                <p th:text="${param.message}"></p>
+            <div class="login-message" th:if="${message}">
+                <p th:text="${message}"></p>
             </div>
             <form th:action="@{/login}" class="signin" method="post">
                 <div>
                     <label class="signin-label">Имя пользователя
-                        <input placeholder="Введите имя пользователя" type="text" name="username"/>
+                        <input id="username-input" placeholder="Введите имя пользователя" type="text" name="username"/>
                     </label>
                 </div>
                 <div>
                     <label class="signin-label">Пароль
-                        <input placeholder="Введите пароль" type="password" name="password"/>
+                        <input id="password-input" placeholder="Введите пароль" type="password" name="password"/>
                     </label>
                 </div>
                 <div>
                     <input class="btn-signin" type="submit" value="Войти"/>
                 </div>
             </form>
-            <form th:action="@{/registration}" class="signup" method="post">
-                <div>
-                    <label class="signup-label">Имя пользователя
-                        <input placeholder="Введите имя пользователя" type="text" name="username"/>
-                    </label>
-                </div>
-                <div>
-                    <label class="signup-label">Пароль
-                        <input placeholder="Введите пароль" type="password" name="password"/>
-                    </label>
-                </div>
+            <form id="signup-form" class="signup" method="post">
                 <div>
                     <input class="btn-signup" type="submit" value="Зарегистрироваться"/>
                 </div>
@@ -406,5 +50,32 @@
         </td>
     </tr>
 </table>
+<script type="text/javascript" th:src="@{/static/jquery-3.4.1.min.js}"></script>
+<script>
+    $(document).ready(function () {
+        $.ajaxSetup({
+            headers:
+                {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}
+        });
+
+        $('#signup-form').submit(function (e) {
+            e.preventDefault();
+            const formData = $("#signup-form").serializeArray();
+            const username = $('#username-input').val();
+            formData.push({name: "username", value: username});
+            formData.push({name: "password", value: $('#password-input').val()});
+            $.ajax({
+                type: "POST",
+                url: "/registration",
+                data: formData,
+                dataType: "html",
+                success: function (data) {
+                    $('body').html(data)
+                }
+            });
+        });
+
+    });
+</script>
 </body>
 </html>

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -24,24 +25,20 @@ public class MainController {
     @Autowired
     private UserRepository userRepository;
 
-    @GetMapping("/registration")
-    public String registration() {
-        return "login";
-    }
-
     @PostMapping("/registration")
-    public String addUser(User user, Model model) {
+    public ModelAndView addUser(User user) {
+        ModelAndView modelAndView = new ModelAndView("login");
         User userInDB = userRepository.findByUsername(user.getUsername());
         if (user.getUsername().isEmpty() || user.getPassword().isEmpty()) {
-            model.addAttribute("message", "Введите имя пользователя и пароль!");
+            modelAndView.addObject("message", "Введите имя пользователя и пароль!");
         } else if (userInDB != null) {
-            model.addAttribute("message", "Пользователь с таким именем уже существует!");
+            modelAndView.addObject("message", "Пользователь с таким именем уже существует!");
         } else {
             user.setActive(true);
             userRepository.save(user);
-            model.addAttribute("message", "Пользователь " + user.getUsername() + " успешно зарегистрирован!");
+            modelAndView.addObject("message", "Пользователь " + user.getUsername() + " успешно зарегистрирован!");
         }
-        return "redirect:/login";
+        return modelAndView;
     }
 
     @RequestMapping("/")

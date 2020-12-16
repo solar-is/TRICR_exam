@@ -51,6 +51,7 @@ h1 {
     vertical-align: top;
     text-align: left;
 }
+
 tr.content {
     display: block;
     width: 1250px;
@@ -200,7 +201,7 @@ tr.content {
     background-size: 15px;
     width: 15px;
     height: 15px;
-    background-image: url("../../static/warning.svg");
+    background-image: url("../static/warning.svg");
     vertical-align: top;
     margin-top: 2px;
     margin-left: 6px;
@@ -234,7 +235,7 @@ tr.content {
     opacity: 1;
 }
 
-.cbx-x, .cbx-r  {
+.cbx-x, .cbx-r {
     display: inline-block;
     margin-right: 6px;
     margin-bottom: 4px;

@@ -59,7 +59,7 @@
             </div>
         </td>
         <td>
-            <p class="username" th:inline="text">Пользователь: [[${#httpServletRequest.remoteUser}]]</p>
+            <p class="username" style="width: 200px;" th:inline="text">Пользователь: [[${#httpServletRequest.remoteUser}]]</p>
             <form th:action="@{/logout}" method="post">
                 <input class="signout" type="submit" value="Sign Out"/>
             </form>
