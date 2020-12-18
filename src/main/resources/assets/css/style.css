@@ -42,11 +42,12 @@ h1 {
     font-weight: bold;
 }
 
-.content > td, .results_row > td {
+.content > td:first-child, .results_row > td {
     padding: 20px 100px;
 }
 
 .content > td:last-child {
+    padding-top: 20px;
     width: 100px;
     vertical-align: top;
     text-align: left;
@@ -265,6 +266,10 @@ tr.content {
 .username {
     font-size: 20px;
     font-weight: bold;
+}
+
+.signin {
+    margin-bottom: 0;
 }
 
 .signin > div {
